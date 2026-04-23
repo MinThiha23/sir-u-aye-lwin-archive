@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Play } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,6 +11,7 @@ interface ClosingSectionProps {
 }
 
 const ClosingSection = ({ onWatchClick }: ClosingSectionProps) => {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const portraitRef = useRef<HTMLDivElement>(null);
   const messageRef = useRef<HTMLDivElement>(null);
@@ -90,14 +92,14 @@ const ClosingSection = ({ onWatchClick }: ClosingSectionProps) => {
         className="absolute left-1/2 bottom-[12vh] lg:bottom-[15vh] -translate-x-1/2 w-[90vw] lg:w-[70vw] text-center z-10"
       >
         <h2 className="font-playfair text-2xl sm:text-3xl lg:text-[clamp(28px,2.5vw,42px)] font-semibold text-ivory-50 mb-6">
-          Thank you for listening with an open heart.
+          {t('closing.title')}
         </h2>
         <button
           onClick={onWatchClick}
           className="btn-primary"
         >
           <Play className="w-4 h-4 mr-2" />
-          Start with the latest talk
+          {t('closing.button')}
         </button>
       </div>
     </section>

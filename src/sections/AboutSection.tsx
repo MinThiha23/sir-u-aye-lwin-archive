@@ -1,43 +1,45 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '@/contexts/LanguageContext';
 import type { TimelineItem, Credential } from '@/types';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const timelineData: TimelineItem[] = [
-  {
-    year: '1992',
-    title: 'First Public Lecture Series',
-    description: 'Began teaching in Yangon, sharing insights on Islamic ethics and spirituality',
-  },
-  {
-    year: '2005',
-    title: 'Founded Interfaith Study Circle',
-    description: 'Established a community dialogue platform bringing together diverse faith traditions',
-  },
-  {
-    year: '2015',
-    title: 'Published "Ethics for Everyday"',
-    description: 'Released a comprehensive guide on applying ethical principles in daily life',
-  },
-  {
-    year: '2022',
-    title: 'Launched Online Archive',
-    description: 'Made decades of lectures accessible to a global audience through digital platforms',
-  },
-];
-
-const credentialsData: Credential[] = [
-  { value: '30+', label: 'Years teaching' },
-  { value: '200+', label: 'Recorded lectures' },
-  { value: '12', label: 'Countries visited' },
-  { value: '3', label: 'Languages' },
-];
-
 const AboutSection = () => {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const portraitRef = useRef<HTMLDivElement>(null);
+
+  const timelineData: TimelineItem[] = [
+    {
+      year: '1992',
+      title: t('timeline.1.title'),
+      description: t('timeline.1.desc'),
+    },
+    {
+      year: '2005',
+      title: t('timeline.2.title'),
+      description: t('timeline.2.desc'),
+    },
+    {
+      year: '2015',
+      title: t('timeline.3.title'),
+      description: t('timeline.3.desc'),
+    },
+    {
+      year: '2022',
+      title: t('timeline.4.title'),
+      description: t('timeline.4.desc'),
+    },
+  ];
+
+  const credentialsData: Credential[] = [
+    { value: '30+', label: t('cred.1') },
+    { value: '200+', label: t('cred.2') },
+    { value: '12', label: t('cred.3') },
+    { value: '3', label: t('cred.4') },
+  ];
   const contentRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const credentialsRef = useRef<HTMLDivElement>(null);
@@ -162,7 +164,7 @@ const AboutSection = () => {
             {/* Quote overlay */}
             <div className="mt-6 lg:mt-8 p-6 bg-emerald-900/5 rounded-xl border-l-4 border-gold-500">
               <p className="font-playfair text-lg lg:text-xl text-gray-800 italic">
-                "Knowledge is the light that guides us through the darkness of ignorance."
+                {t('about.quote')}
               </p>
               <p className="mt-3 text-sm text-gray-600">— Sir U Aye Lwin</p>
             </div>
@@ -171,25 +173,25 @@ const AboutSection = () => {
           {/* Right Column - Content */}
           <div ref={contentRef}>
             <h2 className="animate-item font-playfair text-3xl lg:text-[clamp(34px,3vw,48px)] font-semibold text-gray-900 mb-6">
-              About Sir U Aye Lwin
+              {t('about.title')}
             </h2>
 
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p className="animate-item">
-                For over three decades, Sir U Aye Lwin has delivered lectures that bridge tradition and modern life—rooted in Islamic scholarship and informed by ethics, psychology, and interfaith practice.
+                {t('about.p1')}
               </p>
               <p className="animate-item">
-                His teaching style is calm, precise, and deeply human. Through his talks, he has touched the lives of thousands across Myanmar and beyond, offering guidance on spirituality, ethics, family, and societal issues.
+                {t('about.p2')}
               </p>
               <p className="animate-item">
-                Born into a family of scholars, he pursued Islamic studies from an early age while also engaging with contemporary thought, creating a unique synthesis that resonates with both traditional and modern audiences.
+                {t('about.p3')}
               </p>
             </div>
 
             {/* Timeline */}
             <div ref={timelineRef} className="mt-10 lg:mt-12">
               <h3 className="animate-item font-playfair text-xl lg:text-2xl font-semibold text-gray-900 mb-6">
-                Journey of Wisdom
+                {t('about.journey')}
               </h3>
 
               <div className="relative pl-6 lg:pl-8">

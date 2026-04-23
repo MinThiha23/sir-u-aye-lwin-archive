@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Youtube, Facebook, Podcast, Send, Check } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,6 +13,7 @@ const socialLinks = [
 ];
 
 const NewsletterSection = () => {
+  const { t } = useLanguage();
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -104,17 +106,17 @@ const NewsletterSection = () => {
           {/* Left Column */}
           <div ref={leftRef}>
             <h2 className="animate-item font-playfair text-3xl lg:text-[clamp(34px,3vw,48px)] font-semibold text-gray-900 mb-4">
-              Join the Community
+              {t('newsletter.title')}
             </h2>
 
             <p className="animate-item text-base lg:text-lg text-gray-700 mb-8">
-              Get one reflection a week plus early access to new talks.
+              {t('newsletter.subtitle')}
             </p>
 
             {/* Social Links */}
             <div ref={socialsRef}>
-              <p className="animate-item text-sm text-gray-500 mb-4 label-mono">
-                FOLLOW ON
+              <p className="animate-item text-sm text-gray-500 mb-4 label-mono uppercase">
+                {t('newsletter.follow')}
               </p>
               <div className="flex gap-4">
                 {socialLinks.map((social, index) => (
@@ -137,7 +139,7 @@ const NewsletterSection = () => {
             className="bg-emerald-900 rounded-2xl p-6 lg:p-8 shadow-card"
           >
             <h3 className="font-playfair text-xl lg:text-2xl text-ivory-50 mb-6">
-              Subscribe
+              {t('newsletter.subscribe')}
             </h3>
 
             {isSubmitted ? (
@@ -146,10 +148,10 @@ const NewsletterSection = () => {
                   <Check className="w-8 h-8 text-white" />
                 </div>
                 <p className="text-ivory-50 text-lg font-medium">
-                  Thank you for subscribing!
+                  {t('newsletter.thanks')}
                 </p>
                 <p className="text-ivory-50/60 text-sm mt-2">
-                  You&apos;ll receive our next reflection soon.
+                  {t('newsletter.thanks_sub')}
                 </p>
               </div>
             ) : (
@@ -159,14 +161,14 @@ const NewsletterSection = () => {
                     htmlFor="name"
                     className="block text-sm text-ivory-50/70 mb-2"
                   >
-                    Name
+                    {t('newsletter.name')}
                   </label>
                   <input
                     type="text"
                     id="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Your name"
+                    placeholder={t('newsletter.name_placeholder')}
                     className="w-full px-4 py-3 bg-emerald-800/50 border border-emerald-700 rounded-xl text-ivory-50 placeholder:text-ivory-50/40 focus:outline-none focus:border-gold-500 transition-colors"
                     required
                   />
@@ -177,14 +179,14 @@ const NewsletterSection = () => {
                     htmlFor="email"
                     className="block text-sm text-ivory-50/70 mb-2"
                   >
-                    Email
+                    {t('newsletter.email')}
                   </label>
                   <input
                     type="email"
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="your@email.com"
+                    placeholder={t('newsletter.email_placeholder')}
                     className="w-full px-4 py-3 bg-emerald-800/50 border border-emerald-700 rounded-xl text-ivory-50 placeholder:text-ivory-50/40 focus:outline-none focus:border-gold-500 transition-colors"
                     required
                   />
@@ -194,12 +196,12 @@ const NewsletterSection = () => {
                   type="submit"
                   className="w-full btn-primary mt-2"
                 >
-                  Get updates
+                  {t('newsletter.button')}
                   <Send className="w-4 h-4 ml-2" />
                 </button>
 
                 <p className="text-xs text-ivory-50/50 text-center">
-                  No spam. Unsubscribe anytime.
+                  {t('newsletter.disclaimer')}
                 </p>
               </form>
             )}

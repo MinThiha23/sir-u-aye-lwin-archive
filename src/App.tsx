@@ -16,6 +16,7 @@ import ClosingSection from '@/sections/ClosingSection';
 import Footer from '@/sections/Footer';
 
 import type { Video } from '@/types';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,11 +35,11 @@ function App() {
   const handleWatchClick = useCallback(() => {
     const defaultVideo: Video = {
       id: 'featured',
-      title: 'Al Haj Khalifah U Aye Lwin - Response of Myanmar Religious Communities',
-      date: 'Jul 1, 2021',
+      title: 'Imam Gazali | သိပ္ပံ နှင့် ဒဿနိကဗေဒကို မြှင့်တင်ပေးခဲ့သည့် အီမာမ်ဂဇာလီ သခင်',
+      date: 'Latest',
       theme: 'Spirituality',
-      duration: '21:21',
-      youtubeId: '0NYwQAtssQU',
+      duration: '',
+      youtubeId: '9q2mB1wTH6I',
     };
     setSelectedVideo(defaultVideo);
     setIsModalOpen(true);
@@ -121,6 +122,7 @@ function App() {
   }, []);
 
   return (
+    <LanguageProvider>
     <div className="relative min-h-screen bg-emerald-900">
       {/* Decorative Islamic Overlays */}
       <IslamicDecorOverlay />
@@ -169,6 +171,7 @@ function App() {
         title={selectedVideo?.title || ''}
       />
     </div>
+    </LanguageProvider>
   );
 }
 

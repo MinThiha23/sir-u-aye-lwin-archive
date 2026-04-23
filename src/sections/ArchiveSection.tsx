@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { Play, Clock, Calendar, Tag } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '@/contexts/LanguageContext';
 import type { Video, Theme } from '@/types';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -25,6 +26,7 @@ const themes: Theme[] = [
 ];
 
 const ArchiveSection = ({ onVideoSelect, searchQuery }: ArchiveSectionProps) => {
+  const { t } = useLanguage();
   const [videosData, setVideosData] = useState<Video[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeTheme, setActiveTheme] = useState<Theme>('All');
@@ -58,6 +60,12 @@ const ArchiveSection = ({ onVideoSelect, searchQuery }: ArchiveSectionProps) => 
 
     return filtered;
   }, [activeTheme, searchQuery, videosData]);
+
+  const getThemeKey = (theme: string) => {
+    if (theme === 'Latest Talks') return 'latest';
+    if (theme === 'Most Popular') return 'popular';
+    return theme.toLowerCase();
+  };
 
   // Fetch data from Supabase
   useEffect(() => {
@@ -186,10 +194,10 @@ const ArchiveSection = ({ onVideoSelect, searchQuery }: ArchiveSectionProps) => 
         {/* Header */}
         <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-8 lg:mb-12">
           <h2 className="font-playfair text-3xl lg:text-[clamp(34px,3vw,48px)] font-semibold text-ivory-50 mb-4">
-            Knowledge Archive
+            {t('archive.title')}
           </h2>
           <p className="text-base lg:text-lg text-ivory-50/70">
-            Browse talks by theme, length, and topic.
+            {t('archive.subtitle')}
           </p>
         </div>
 
@@ -207,7 +215,7 @@ const ArchiveSection = ({ onVideoSelect, searchQuery }: ArchiveSectionProps) => 
                 : 'bg-emerald-800/60 text-ivory-50/80 hover:bg-emerald-800 hover:text-ivory-50'
                 }`}
             >
-              {theme}
+              {t(`archive.filter.${getThemeKey(theme)}`)}
             </button>
           ))}
         </div>
@@ -231,13 +239,9 @@ const ArchiveSection = ({ onVideoSelect, searchQuery }: ArchiveSectionProps) => 
                 <div className="relative aspect-video rounded-xl overflow-hidden bg-emerald-800 mb-4">
                   {/* YouTube Thumbnail */}
                   <img
-                    src={`https://img.youtube.com/vi/${video.youtubeId}/maxresdefault.jpg`}
+                    src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
                     alt={video.title}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    onError={(e) => {
-                      // Fallback to high quality if maxres isn't available
-                      e.currentTarget.src = `https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`;
-                    }}
                   />
 
                   {/* Play button overlay */}
@@ -248,14 +252,16 @@ const ArchiveSection = ({ onVideoSelect, searchQuery }: ArchiveSectionProps) => 
                   </div>
 
                   {/* Duration badge */}
-                  <div className="absolute bottom-3 right-3 px-2 py-1 bg-black/60 rounded text-xs text-ivory-50 flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
-                    {video.duration}
-                  </div>
+                  {video.duration && (
+                    <div className="absolute bottom-3 right-3 px-2 py-1 bg-black/60 rounded text-xs text-ivory-50 flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      {video.duration}
+                    </div>
+                  )}
 
                   {/* Theme badge */}
                   <div className="absolute top-3 left-3 px-2 py-1 bg-emerald-900/80 rounded text-xs text-ivory-50/90">
-                    {video.theme}
+                    {t(`archive.filter.${getThemeKey(video.theme)}`)}
                   </div>
                 </div>
 
@@ -271,7 +277,7 @@ const ArchiveSection = ({ onVideoSelect, searchQuery }: ArchiveSectionProps) => 
                     </span>
                     <span className="flex items-center gap-1">
                       <Tag className="w-3.5 h-3.5" />
-                      {video.theme}
+                      {t(`archive.filter.${getThemeKey(video.theme)}`)}
                     </span>
                   </div>
                 </div>
@@ -284,13 +290,13 @@ const ArchiveSection = ({ onVideoSelect, searchQuery }: ArchiveSectionProps) => 
         {filteredVideos.length === 0 && !isLoading && (
           <div className="text-center py-16">
             <p className="text-ivory-50/60 text-lg">
-              No talks found matching your criteria.
+              {t('archive.empty')}
             </p>
             <button
               onClick={() => setActiveTheme('All')}
               className="mt-4 text-gold-500 hover:text-gold-400 transition-colors"
             >
-              Clear filters
+              {t('archive.clear')}
             </button>
           </div>
         )}
@@ -299,7 +305,7 @@ const ArchiveSection = ({ onVideoSelect, searchQuery }: ArchiveSectionProps) => 
         {!isLoading && filteredVideos.length > 0 && filteredVideos.length < videosData.length && activeTheme === 'All' && (
           <div className="text-center mt-12">
             <button className="btn-outline">
-              Load more talks
+              {t('archive.load_more')}
             </button>
           </div>
         )}

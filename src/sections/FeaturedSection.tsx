@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Play, FileText } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,6 +11,7 @@ interface FeaturedSectionProps {
 }
 
 const FeaturedSection = ({ onWatchClick }: FeaturedSectionProps) => {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const portraitRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -131,7 +133,7 @@ const FeaturedSection = ({ onWatchClick }: FeaturedSectionProps) => {
         className="absolute left-6 lg:left-[6vw] top-20 lg:top-[7vh] z-20"
       >
         <span className="inline-block px-3 lg:px-4 py-1.5 bg-gold-500 text-ivory-50 text-xs lg:text-sm font-medium rounded-full label-mono">
-          Featured
+          {t('featured.badge')}
         </span>
       </div>
 
@@ -145,17 +147,17 @@ const FeaturedSection = ({ onWatchClick }: FeaturedSectionProps) => {
             ref={headlineRef}
             className="font-playfair text-2xl sm:text-3xl lg:text-[clamp(28px,2.5vw,40px)] font-semibold text-ivory-50 leading-tight mb-4"
           >
-            Al Haj Khalifah U Aye Lwin - Response of Myanmar Religious Communities
+            Imam Gazali | သိပ္ပံ နှင့် ဒဿနိကဗေဒကို မြှင့်တင်ပေးခဲ့သည့် အီမာမ်ဂဇာလီ သခင်
           </h2>
 
           <div className="w-3/4 h-1 bg-gold-500 mb-4" />
 
           <p className="text-sm lg:text-base text-ivory-50/80 leading-relaxed mb-4">
-            A calm, evidence-based conversation on finding common ground across beliefs—without diluting identity.
+            {t('featured.desc')}
           </p>
 
           <p className="text-sm text-ivory-50/60 mb-6">
-            21:21 • Spirituality
+            Spirituality
           </p>
 
           <div ref={ctaRef} className="flex flex-col sm:flex-row gap-3">
@@ -164,11 +166,11 @@ const FeaturedSection = ({ onWatchClick }: FeaturedSectionProps) => {
               className="btn-primary group"
             >
               <Play className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
-              Watch featured talk
+              {t('featured.watch')}
             </button>
             <button className="btn-outline text-sm">
               <FileText className="w-4 h-4 mr-2" />
-              View transcript
+              {t('featured.transcript')}
             </button>
           </div>
         </div>

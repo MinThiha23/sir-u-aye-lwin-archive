@@ -2,10 +2,12 @@ import { useEffect, useRef } from 'react';
 import { Mail, ExternalLink } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Footer = () => {
+  const { t } = useLanguage();
   const footerRef = useRef<HTMLElement>(null);
   const columnsRef = useRef<HTMLDivElement>(null);
 
@@ -33,11 +35,11 @@ const Footer = () => {
   }, []);
 
   const navLinks = [
-    { label: 'Archive', href: '#archive' },
-    { label: 'About', href: '#about' },
-    { label: 'Themes', href: '#archive' },
-    { label: 'Newsletter', href: '#contact' },
-    { label: 'Privacy', href: '#' },
+    { label: t('nav.archive'), href: '#archive' },
+    { label: t('nav.about'), href: '#about' },
+    { label: t('nav.themes'), href: '#archive' },
+    { label: t('nav.newsletter'), href: '#contact' },
+    { label: t('nav.privacy'), href: '#' },
   ];
 
   return (
@@ -51,20 +53,20 @@ const Footer = () => {
           <div className="footer-column">
             <a href="#home" className="inline-block mb-4">
               <span className="font-playfair text-xl lg:text-2xl font-semibold text-ivory-50">
-                Al Haj U Aye Lwin Talks
+                {t('header.title')}
               </span>
             </a>
             <p className="text-ivory-50/70 text-sm leading-relaxed">
-              Wisdom for Modern Life
+              {t('footer.tagline')}
             </p>
             <p className="text-ivory-50/50 text-xs mt-4">
-              Bridging tradition and modernity through ethical teachings.
+              {t('footer.desc')}
             </p>
           </div>
 
           {/* Navigation Links */}
           <div className="footer-column">
-            <h4 className="label-mono text-ivory-50/50 mb-4">NAVIGATION</h4>
+            <h4 className="label-mono text-ivory-50/50 mb-4">{t('footer.nav')}</h4>
             <nav className="flex flex-col gap-2">
               {navLinks.map((link, index) => (
                 <a
@@ -83,7 +85,7 @@ const Footer = () => {
 
           {/* Contact */}
           <div className="footer-column">
-            <h4 className="label-mono text-ivory-50/50 mb-4">CONTACT</h4>
+            <h4 className="label-mono text-ivory-50/50 mb-4">{t('footer.contact')}</h4>
             <a
               href="mailto:talks@siruayelwin.org"
               className="text-ivory-50/70 hover:text-ivory-50 transition-colors text-sm inline-flex items-center gap-2"
@@ -92,7 +94,7 @@ const Footer = () => {
               talks@siruayelwin.org
             </a>
             <p className="text-ivory-50/50 text-xs mt-4">
-              For speaking inquiries and collaborations.
+              {t('footer.inquiries')}
             </p>
           </div>
         </div>
@@ -100,13 +102,13 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-emerald-800 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-ivory-50/50 text-xs">
-            &copy; {new Date().getFullYear()} Al Haj U Aye Lwin Talks. All rights reserved.
+            &copy; {new Date().getFullYear()} {t('header.title')}. {t('footer.rights')}
           </p>
           <a
             href="#"
             className="text-ivory-50/40 hover:text-ivory-50/60 transition-colors text-xs"
           >
-            Credits
+            {t('footer.credits')}
           </a>
         </div>
       </div>

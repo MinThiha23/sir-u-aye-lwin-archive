@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Search, Menu, X } from 'lucide-react';
+import { Search, Menu, X, Globe } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface HeaderProps {
   onSearch?: (query: string) => void;
@@ -10,6 +11,7 @@ const Header = ({ onSearch }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,10 +30,10 @@ const Header = ({ onSearch }: HeaderProps) => {
   };
 
   const navLinks = [
-    { label: 'Home', href: '#home' },
-    { label: 'About', href: '#about' },
-    { label: 'Archive', href: '#archive' },
-    { label: 'Contact', href: '#contact' },
+    { label: t('nav.home'), href: '#home' },
+    { label: t('nav.about'), href: '#about' },
+    { label: t('nav.archive'), href: '#archive' },
+    { label: t('nav.contact'), href: '#contact' },
   ];
 
   return (
@@ -46,7 +48,7 @@ const Header = ({ onSearch }: HeaderProps) => {
           {/* Logo */}
           <a href="#home" className="flex items-center gap-2 group">
             <span className="font-playfair text-xl lg:text-2xl font-semibold text-ivory-50 group-hover:text-gold-400 transition-colors">
-              Al Haj U Aye Lwin Talks
+              {t('header.title')}
             </span>
           </a>
 
@@ -64,7 +66,18 @@ const Header = ({ onSearch }: HeaderProps) => {
           </nav>
 
           {/* Right Side Actions */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 lg:gap-4">
+            {/* Language Toggle */}
+            <button
+              onClick={() => setLanguage(language === 'en' ? 'my' : 'en')}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-ivory-50/90 hover:text-ivory-50 hover:bg-emerald-800/50 rounded-full transition-all border border-emerald-700/50"
+              title="Toggle Language"
+            >
+              <Globe className="w-4 h-4" />
+              <span className="hidden sm:inline">{language === 'en' ? 'မြန်မာ' : 'EN'}</span>
+              <span className="sm:hidden">{language === 'en' ? 'MM' : 'EN'}</span>
+            </button>
+
             {/* Search */}
             <div className="relative">
               {isSearchOpen ? (
@@ -73,7 +86,7 @@ const Header = ({ onSearch }: HeaderProps) => {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search talks..."
+                    placeholder={t('header.search')}
                     className="w-40 lg:w-56 px-3 py-1.5 text-sm bg-emerald-800/80 border border-emerald-700 rounded-lg text-ivory-50 placeholder:text-ivory-50/50 focus:outline-none focus:border-gold-500 transition-colors"
                     autoFocus
                     onBlur={() => !searchQuery && setIsSearchOpen(false)}

@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Play } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,6 +11,7 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ onWatchClick }: HeroSectionProps) => {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const quoteRef = useRef<HTMLDivElement>(null);
   const portraitRef = useRef<HTMLDivElement>(null);
@@ -122,12 +124,12 @@ const HeroSection = ({ onWatchClick }: HeroSectionProps) => {
         className="absolute left-[7vw] top-[15vh] lg:top-[18vh] w-[86vw] lg:w-[42vw] z-10"
       >
         <blockquote className="font-playfair text-2xl sm:text-3xl lg:text-[clamp(32px,3.5vw,52px)] font-semibold text-ivory-50 leading-[1.15] lg:leading-[1.05]">
-          "The best of people are those who are most beneficial to people."
+          {t('hero.quote')}
         </blockquote>
         <div className="mt-4 lg:mt-6 flex flex-col items-start lg:items-end">
           <div className="w-16 lg:w-24 h-0.5 bg-gold-500 mb-3" />
           <cite className="font-playfair text-base lg:text-lg text-ivory-50/80 not-italic">
-            — Hadith
+            {t('hero.citation')}
           </cite>
         </div>
       </div>
@@ -138,7 +140,7 @@ const HeroSection = ({ onWatchClick }: HeroSectionProps) => {
         className="absolute right-6 lg:right-[6vw] top-20 lg:top-[7vh] z-20"
       >
         <span className="inline-block px-3 lg:px-4 py-1.5 bg-gold-500 text-ivory-50 text-xs lg:text-sm font-medium rounded-full label-mono">
-          Latest Talk
+          {t('hero.latest_talk')}
         </span>
       </div>
 
@@ -148,17 +150,17 @@ const HeroSection = ({ onWatchClick }: HeroSectionProps) => {
         className="absolute left-[7vw] bottom-[8vh] lg:bottom-[10vh] w-[86vw] lg:w-[46vw] z-10"
       >
         <h2 className="font-playfair text-xl sm:text-2xl lg:text-3xl font-semibold text-ivory-50 mb-2">
-          Al Haj Khalifah U Aye Lwin - Response of Myanmar Religious Communities
+          Imam Gazali | သိပ္ပံ နှင့် ဒဿနိကဗေဒကို မြှင့်တင်ပေးခဲ့သည့် အီမာမ်ဂဇာလီ သခင်
         </h2>
         <p className="text-sm lg:text-base text-ivory-50/70 mb-4 lg:mb-6">
-          21:21 • Spirituality
+          Spirituality
         </p>
         <button
           onClick={onWatchClick}
           className="btn-outline group"
         >
           <Play className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
-          Watch now
+          {t('hero.watch_now')}
         </button>
       </div>
     </section>
