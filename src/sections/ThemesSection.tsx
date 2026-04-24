@@ -102,7 +102,7 @@ const ThemesSection = () => {
       >
         <div className="relative w-full h-full">
           <img
-            src="/themes_portrait.jpg"
+            src="/U-Aye-Lwin-copy1.jpg"
             alt="Sir U Aye Lwin"
             className="w-full h-full object-cover"
           />

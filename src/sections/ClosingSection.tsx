@@ -77,7 +77,7 @@ const ClosingSection = ({ onWatchClick }: ClosingSectionProps) => {
       >
         <div className="relative w-full h-full rounded-2xl overflow-hidden">
           <img
-            src="/closing_portrait.jpg"
+            src="/A8.png"
             alt="Sir U Aye Lwin"
             className="w-full h-full object-cover"
           />

@@ -43,9 +43,9 @@ export const translations = {
     // About Section
     'about.title': 'About Sir U Aye Lwin',
     'about.quote': '"Knowledge is the light that guides us through the darkness of ignorance."',
-    'about.p1': 'For over three decades, Sir U Aye Lwin has delivered lectures that bridge tradition and modern life—rooted in Islamic scholarship and informed by ethics, psychology, and interfaith practice.',
-    'about.p2': 'His teaching style is calm, precise, and deeply human. Through his talks, he has touched the lives of thousands across Myanmar and beyond, offering guidance on spirituality, ethics, family, and societal issues.',
-    'about.p3': 'Born into a family of scholars, he pursued Islamic studies from an early age while also engaging with contemporary thought, creating a unique synthesis that resonates with both traditional and modern audiences.',
+    'about.p1': 'Alhaj U Aye Lwin is a prominent religious leader of Islam in Myanmar, widely recognized for his commitment to interfaith harmony. As the chief govener of the Islamic Center of Myanmar and a founding member of Religions for Peace Myanmar, he has dedicated his career to bridging the divide between diverse ethnic and religious communities in a complex sociopolitical landscape.',
+    'about.p2': 'Known for his profound knowledge of both Islamic jurisprudence and Buddhist philosophy, U Aye Lwin often serves as a crucial voice of moderation, advocating for peaceful coexistence and human rights through dialogue rather than confrontation.',
+    'about.p3': 'Religiously he is the student of Tasawwuf and Khalifa of the Qadria Alia Tariqa in Myanmar, where he shares knowledge about Islamic mysticism. Throughout his life he has written books and given lectures focusing on Tasawwuf.',
     'about.journey': 'Journey of Wisdom',
     
     // Timeline Data
